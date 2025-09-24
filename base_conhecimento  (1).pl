@@ -1,0 +1,41 @@
+% *** MODELAGEM DA BASE DE RECONHECIMENTO *** - Leticia
+
+%fatos
+trilha(inteligencia_artificial, 'Aplicação e estudo de algoritmos inteligentes, machine learning e visão computacional')
+trilha(desenvolvimento_web, ' Criação de sistemas e aplicações web, front-end e back-end')
+trilha(seguranca_da_informacao, 'Proteção de dados, criptografia e análise de vulnerabilidade de sistemas)
+trilha(ciencia_de_dados, 'Análise e interpretação de grande volume de dados, machine learning)
+trilha(redes_e_infraestrutura, 'Manutenção e configuração de redes, servidores de infraestrutura de sistemas')
+
+perfil(inteligencia_artificial, logica_de_programacao, 4)
+perfil(inteligencia_artificial, matematica_estatistica, 5)
+perfil(inteligencia_artificial, pensamento_abstrato, 5)
+                                                                                                             
+perfil(desenvolvimento_web, design_visual,3)                                                                                                  
+perfil(desenvolvimento_web, programacao_frontend, 5)
+perfil(desenvolvimento_web, programacao_backend, 5)
+
+perfil(seguranca_da_informacao, criptografia_basica, 3)                                                                                                           
+perfil(seguranca_da_informacao, resolucao_problemas, 4)
+perfil(seguranca_da_informacao, conhecimento_redes, 5) 
+                                                                                                             
+perfil(ciencia_de_dados, resolucao_problemas, 3)
+perfil(ciencia_de_dados, matematica_estatistica, 5)
+perfil(ciencia_de_dados, programacao_python, 4)
+
+perfil(redes_e_infraestrutura, conhecimento_redes, 5)
+perfil(redes_e_infraestrutura, configuracao_servidores, 5)
+perfil(redes_e_infraestrutura, resolucao_problemas, 4)
+                                                                                                             
+%perguntas   
+pergunta(1, 'Você tem afinidade com matemática e estatística?', matematica_estatistica)
+pergunta(2, 'Você gosta de programar algoritmos complexos e resolver problemas abstratos?', pensamento_abstrato)
+pergunta(3, 'Você gosta de resolver problemas usando lógica de programação?', logica_programacao)
+pergunta(4, 'Você tem interesse em desenvolvimento visual e design de interfaces?', design_visual)
+pergunta(5, 'Você tem interesse em criar aplicações que outras pessoas utilizam diretamente?', programacao_frontend)
+pergunta(6, 'Você gosta de programar para web (front-end ou back-end)?', programacao_backend)
+pergunta(7, 'Você se vê trabalhando com inovações e soluções criativas?', resolucao_problemas).
+pergunta(8, 'Você tem facilidade com redes de computadores e protocolos?', conhecimento_redes)
+pergunta(9, 'Você gosta de configurar servidores e entender como sistemas funcionam por trás?', configuracao_servidores)
+pergunta(10, 'Você tem interesse em ciência de dados e programação em Python?', programacao_python)
+
