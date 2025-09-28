@@ -74,7 +74,9 @@ iniciar :-
 
     faz_perguntas,
 
-    recomenda(RecomendacoesOrdenadas), 
+    findall(resposta(Id, Resposta), resposta(Id, Resposta), RespostasFinais),
+
+    recomenda(RespostasFinais, RecomendacoesOrdenadas), 
 
     exibe_resultado(RecomendacoesOrdenadas).
 
