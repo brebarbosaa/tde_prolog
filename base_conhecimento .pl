@@ -100,6 +100,7 @@ exibe_resultado(RecomendacoesOrdenadas) :-
     writeln('As suas trilhas em ordem de compatibilidade são:'),
     exibe_ranking(1, RecomendacoesOrdenadas).
 
+% exibe ranking das trilhas
 exibe_ranking(_, []).
 exibe_ranking(Posicao, [Pontuacao-Trilha | Resto]) :-
     trilha(Trilha, Descricao),
@@ -120,8 +121,14 @@ justificar_recomendacao(Trilha, Pontuacao) :-
     format('   - Justificativa (~w pontos):~n', [Pontuacao]),
     (   HabilidadesPontuadas = []
     ->  writeln('     Nenhuma afinidade foi encontrada com base nas suas respostas.')
-    ;   writeln('     Você pontuou nessa trilha com afinidade em algumas habilidades.')
+    ;   writeln('     Você pontuou nessa trilha com afinidade em algumas habilidades:'),
+    escreve_habilidades(HabilidadesPontuadas)
     ).
+
+escreve_habilidades([]). 
+escreve_habilidades([Habilidade | Resto]) :- 
+    format(' -> ~w~n', [Habilidade]), 
+    escreve_habilidades(Resto).
 
 % --- Arquivos de Teste ---
 
@@ -133,6 +140,7 @@ executar_teste_arquivo(NomeArquivo) :-
     recomenda(Respostas, Recomendacoes),
     exibir_resultado_teste(NomeArquivo, Recomendacoes).
 
+% carrega arquivo externo para testes automaticos
 carregar_arquivo_teste(NomeArquivo) :-
     atom_concat(NomeArquivo, '.pl', Arquivo),
     (   exists_file(Arquivo)
@@ -142,6 +150,7 @@ carregar_arquivo_teste(NomeArquivo) :-
         fail
     ).
 
+% exibe resultado 
 exibir_resultado_teste(NomeArquivo, []) :-
     format('~n ~w: Nenhuma recomendação gerada~n', [NomeArquivo]).
 
@@ -150,58 +159,19 @@ exibir_resultado_teste(NomeArquivo, [Pontuacao-Trilha|Resto]) :-
            [NomeArquivo, Trilha, Pontuacao]),
     exibir_todas_recomendacoes([Pontuacao-Trilha|Resto]).
 
+% exibe recomendações de um teste
 exibir_todas_recomendacoes([]).
 exibir_todas_recomendacoes([Pontuacao-Trilha|Resto]) :-
     format('- ~w: ~w pontos~n', [Trilha, Pontuacao]),
     exibir_todas_recomendacoes(Resto).
 
-% Executa todos os testes
+% Executa todos os testes de perfis
 executar_todos_testes :-
     writeln('Executando testes automáticos '),
     (   executar_teste_arquivo('perfil_1'),
         executar_teste_arquivo('perfil_2'),
-        executar_teste_arquivo('perfil_3')
-    ->  writeln('Testes finalizados')
-    ;   writeln('Algum teste falhou')
-    ).
-% --- Arquivos de Teste ---
-
-executar_teste_arquivo(NomeArquivo) :-
-    format('~nRodando teste: ~w~n', [NomeArquivo]),
-    retractall(resposta(_, _)), % limpa respostas anteriores
-    carregar_arquivo_teste(NomeArquivo),
-    findall(resposta(Id, Valor), resposta(Id, Valor), Respostas),
-    recomenda(Respostas, Recomendacoes),
-    exibir_resultado_teste(NomeArquivo, Recomendacoes).
-
-carregar_arquivo_teste(NomeArquivo) :-
-    atom_concat(NomeArquivo, '.pl', Arquivo),
-    (   exists_file(Arquivo)
-    ->  consult(Arquivo),
-        format('Arquivo ~w carregado.~n', [Arquivo])
-    ;   format('Arquivo ~w não encontrado.~n', [Arquivo]),
-        fail
-    ).
-
-exibir_resultado_teste(NomeArquivo, []) :-
-    format('~n ~w: Nenhuma recomendação gerada~n', [NomeArquivo]).
-
-exibir_resultado_teste(NomeArquivo, [Pontuacao-Trilha|Resto]) :-
-    format('~n ~w: Recomendação - ~w (Pontuação: ~w)~n', 
-           [NomeArquivo, Trilha, Pontuacao]),
-    exibir_todas_recomendacoes([Pontuacao-Trilha|Resto]).
-
-exibir_todas_recomendacoes([]).
-exibir_todas_recomendacoes([Pontuacao-Trilha|Resto]) :-
-    format('- ~w: ~w pontos~n', [Trilha, Pontuacao]),
-    exibir_todas_recomendacoes(Resto).
-
-% Executa todos os testes
-executar_todos_testes :-
-    writeln('Executando testes automáticos '),
-    (   executar_teste_arquivo('perfil_1'),
-        executar_teste_arquivo('perfil_2'),
-        executar_teste_arquivo('perfil_3')
+        executar_teste_arquivo('perfil_3'),
+        executar_teste_arquivo('perfil_4')
     ->  writeln('Testes finalizados')
     ;   writeln('Algum teste falhou')
     ).
@@ -235,7 +205,7 @@ executar_opcao(2) :-
     menu_principal.
 
 executar_opcao(3) :-
-    writeln('Encerrando').
+    writeln('Saindo...').
 
 executar_opcao(_) :-
     writeln('Opção inválida!'),
